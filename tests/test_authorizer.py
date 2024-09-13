@@ -28,9 +28,9 @@ class TestLambdaAuthorizer(unittest.TestCase):
         This method runs before every test case to mock environment variables for API key
         validation.
         """
-        self.valid_api_key = 'test-valid-key'
-        self.invalid_api_key = 'test-invalid-key'
-        self.header_name = 'x-origin-verify'
+        self.valid_api_key = "test-valid-key"
+        self.invalid_api_key = "test-invalid-key"
+        self.header_name = "x-origin-verify"
 
         # Patch environment variables for each test case
         patcher = patch.dict('os.environ', {
@@ -46,7 +46,7 @@ class TestLambdaAuthorizer(unittest.TestCase):
         Test that the handler correctly authorizes a request with the valid API key.
         
         This test simulates a request with the valid API key and checks that the handler 
-        returns 'isAuthorized: True'.
+        returns `{'isAuthorized': True}`.
         """
         event = {
             'headers': {
@@ -58,14 +58,13 @@ class TestLambdaAuthorizer(unittest.TestCase):
         result = handler(event, None)
         self.assertTrue(result['isAuthorized'])
 
-
     @patch('simple_authorizer.authorizer.logger')
     def test_authorize_with_invalid_key(self, mock_logger):  # pylint: disable=unused-argument
         """
         Test that the handler denies authorization with an invalid API key.
         
         This test simulates a request with an invalid API key and checks that the handler 
-        returns 'isAuthorized: False'.
+        returns `{'isAuthorized': False}`.
         """
         event = {
             'headers': {
@@ -83,7 +82,7 @@ class TestLambdaAuthorizer(unittest.TestCase):
         Test that the handler denies authorization when no API key is provided in the headers.
         
         This test simulates a request where the API key header is missing and checks that 
-        'isAuthorized: False' is returned.
+        `{'isAuthorized': False}` is returned.
         """
         event = {
             'headers': {}  # No API key provided
@@ -99,7 +98,7 @@ class TestLambdaAuthorizer(unittest.TestCase):
         Test that the handler denies authorization and handles exceptions gracefully.
         
         This test simulates an exception during the execution of the handler (e.g., a missing
-        'headers' field in the event) and checks that 'isAuthorized: False' is returned.
+        'headers' field in the event) and checks that `{'isAuthorized': False}` is returned.
         """
         # Malformed event that will raise an exception
         event = None  # Invalid event input
@@ -144,7 +143,7 @@ class TestConstantTimeCompare(unittest.TestCase):
         
         This test checks that the function returns True when comparing two identical strings.
         """
-        self.assertTrue(constant_time_compare('test', 'test'))
+        self.assertTrue(constant_time_compare("test", "test"))
 
     def test_different_strings(self):
         """
@@ -152,7 +151,7 @@ class TestConstantTimeCompare(unittest.TestCase):
         
         This test checks that the function returns False when comparing two different strings.
         """
-        self.assertFalse(constant_time_compare('test', 'different'))
+        self.assertFalse(constant_time_compare("test", "different"))
 
     def test_empty_strings(self):
         """
@@ -160,7 +159,7 @@ class TestConstantTimeCompare(unittest.TestCase):
         
         This test checks that the function returns True when comparing two empty strings.
         """
-        self.assertTrue(constant_time_compare('', ''))
+        self.assertTrue(constant_time_compare("", ""))
 
 
 if __name__ == '__main__':
