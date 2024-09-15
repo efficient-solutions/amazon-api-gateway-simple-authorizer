@@ -4,6 +4,13 @@ This is a simple Lambda authorizer for Amazon API Gateway, designed to protect a
 
 This authorizer is lightweight and requires minimal resources, making it highly cost-effective for simple use cases. It doesn't use AWS Secrets Manager, make external network calls, or support key rotation, keeping the implementation straightforward.
 
+## Demo
+
+To experience how the authorizer works, try accessing the following endpoints:
+
+- [Protected API via CloudFront](https://efficient.solutions/link/qxamw/) (Authorized Access)
+- [Direct API Access](https://efficient.solutions/link/dmnsc/) (Unauthorized)
+
 ## Installation
 
 To install the package, run:
